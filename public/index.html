@@ -40,6 +40,28 @@
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
     <title>React App</title>
+
+    <script> (function (d, s) {
+        var js = d.createElement(s),
+          sc = d.getElementsByTagName(s)[0];
+        js.src = "https://paywall.unlock-protocol.com/static/unlock.latest.min.js";
+        sc.parentNode.insertBefore(js, sc);
+      }(document, "script"));
+    </script>
+
+    <script>
+      var unlockProtocolConfig = {
+        locks: {
+          '0x4CE43e3AE07c459b11d753350Df0568fAF52293e': {
+            name: 'The Unlock Members lock',
+          },
+        },
+        icon: 'https://unlock-protocol.com/static/images/svg/unlock-word-mark.svg',
+        callToAction: {
+          'default': 'Please Unlock things!',
+        },
+      };
+    </script>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
