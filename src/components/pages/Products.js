@@ -7,17 +7,6 @@ import Web3Modal from "web3modal";
 
 export default function Products() {
 
-
-
-
-
-  
-
-
-
-
-
-
   const apiCall = async () => {
  
     const providerOptions = {
@@ -56,9 +45,6 @@ export default function Products() {
 
     const address = web3.currentProvider.selectedAddress;
  
- 
- 
- 
     axios.get(`https://api.nftport.xyz/v0/accounts/${address}`, {
       params: {
         chain: 'ethereum',
@@ -69,6 +55,7 @@ export default function Products() {
       },
     })
     .then(function (response) {
+      console.log({address});
       console.log(response);
     })
     .catch(function (error) {
@@ -78,8 +65,18 @@ export default function Products() {
 
   return (
     <>
-      <h1 className='products'>PRODUCTS</h1>
-      <Button onClick={apiCall}>Lets do an API call</Button>
+      <h1 className='products'>PRODUCTS
+      <Button
+          className='btns'
+          buttonStyle='btn--primary'
+          buttonSize='btn--large'
+          onClick={apiCall}
+        >
+          Connect Wallet<i className='far fa-play-circle' />
+        </Button>
+      </h1>
+     
+      {/* <Button onClick={apiCall}>Lets do an API call</Button> */}
     </>  
   );
 }

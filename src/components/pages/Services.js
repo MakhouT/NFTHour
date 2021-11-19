@@ -21,7 +21,17 @@ export default function Services() {
 
   return (
     <>
-      <h1 className='services'>SERVICES</h1>
+      <h1 className='services'>SERVICES
+    
+      <Button
+          className='btns'
+          buttonStyle='btn--primary'
+          buttonSize='btn--large'
+          onClick={unlock}
+        >
+          Unlock<i className='far fa-play-circle' />
+      </Button>
+      </h1>
       {locked === 'unlocked' && 'Im unlocked'}
       {locked !== 'unlocked' && <Button onClick={unlock}>Unlock</Button>}
 
