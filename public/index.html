@@ -62,6 +62,14 @@
         },
       };
     </script>
+
+
+    <link rel="stylesheet" href="./Build/TemplateData/style.css">
+    <script src="./Build/TemplateData/UnityProgress.js"></script>
+    <script src="./Build/Build/UnityLoader.js"></script>
+    <script>
+      var unityInstance = UnityLoader.instantiate("unityContainer", "Build/jojo.json", {onProgress: UnityProgress});
+    </script>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
