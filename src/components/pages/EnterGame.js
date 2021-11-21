@@ -10,7 +10,7 @@ export default class EnterGame extends React.Component {
 
     this.state = {
       address: '',
-      nfts: [ ],
+      nfts: [],
     };
 
     this.unityContent = new UnityContent(
@@ -23,7 +23,7 @@ export default class EnterGame extends React.Component {
     this.unityContent.send("GameManager", "Previous");
   }
 
-  next() {
+  sendToUnity() {
     const availableBackgrounds = ['desert', 'city', 'suburbs', 'egypt', 'sea'];
     const names = this.state.nfts.map(nft => nft.name);
     const haveBackgrounds = availableBackgrounds.map(bg => names.includes(bg) ? '1' : '0').join('');
@@ -59,11 +59,11 @@ export default class EnterGame extends React.Component {
       url: 'https://api.nftport.xyz/v0/mints/easy/urls',
       headers: {'Content-Type': 'application/json', Authorization: '4162f7a3-40f4-4f6b-8c8d-e735d3cc9590'},
       data: {
-        chain: 'rinkeby',
+        chain: 'polygon',
         name: 'desert',
         description: 'Testing How it works!',
         file_url: 'https://cdn.vox-cdn.com/thumbor/GnlLz4NRbZjkEpSJWlrYHlItR1k=/1400x0/filters:no_upscale()/cdn.vox-cdn.com/uploads/chorus_asset/file/22443194/Clever_Lumimancer_EN.png',
-        mint_to_address: '0xDc9e3501A6b49458A07dBd1CDa9473131f24a74F'
+        mint_to_address: this.state.address
       }
     };
     
@@ -81,48 +81,47 @@ export default class EnterGame extends React.Component {
       await this.getAddress();
     }
 
+
+
     axios.get(`https://api.nftport.xyz/v0/accounts/${this.state.address}`, {
       params: {
-        chain: 'rinkeby',
+        chain: 'polygon',
+        include: 'metadata'
       },
       headers: {
         'Content-Type': 'application/json', 
         'Authorization': '4162f7a3-40f4-4f6b-8c8d-e735d3cc9590'
       },
     })
-
     .then(function (response) {
-      console.log(response);
+      console.log(response.data.nfts);
       this.setState({
-        ...this.state,
-        nfts: response.nfts,
-
+        nfts: response.data.nfts,
       });
-      console.log(response.nfts);
+      this.sendToUnity();
     })
     .catch(function (error) {
       console.log(error);
-    });
+    });    
   }
 
   render() {
     return (
       <div>
         <h1>  
-        <button onClick={this.next.bind(this)}>Load NFTs</button>
+        <button onClick={this.getNFTs.bind(this)}>Load NFTs</button>
         <button onClick={this.mint1.bind(this)}>Mint Background Card 1</button>
         {/* <button onClick={this.mint2.bind(this)}>Mint Background Card 2</button>
         <button onClick={this.mint3.bind(this)}>Mint Background Card 3</button>
         <button onClick={this.mint4.bind(this)}>Mint Background Card 4</button>
         <button onClick={this.mint5.bind(this)}>Mint Background Card 5</button> */}
         
-        //
         {this.state.nfts.map(nft => (
           <div key={nft.token_id}>{nft.name}</div>
         ))}
-       
+       <div style={{width: 600, height: 400}}>
          <Unity unityContent={this.unityContent} />
-       
+       </div>
         </h1>  
       </div>
     );
