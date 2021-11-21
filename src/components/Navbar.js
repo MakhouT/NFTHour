@@ -31,7 +31,7 @@ function Navbar() {
       <nav className='navbar'>
         <div className='navbar-container'>
           <Link to='/' className='navbar-logo' onClick={closeMobileMenu}>
-            TRVL
+            NFT HOUR
             <i className='fab fa-typo3' />
           </Link>
           <div className='menu-icon' onClick={handleClick}>
@@ -45,20 +45,20 @@ function Navbar() {
             </li>
             <li className='nav-item'>
               <Link
-                to='/services'
+                to='/EnterGame'
                 className='nav-links'
                 onClick={closeMobileMenu}
               >
-                Services
+                Enter Game
               </Link>
             </li>
             <li className='nav-item'>
               <Link
-                to='/products'
+                to='/Inventory'
                 className='nav-links'
                 onClick={closeMobileMenu}
               >
-                Products
+                Inventory
               </Link>
             </li>
 
